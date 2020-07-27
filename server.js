@@ -3,10 +3,14 @@ require("express")().listen(1343);
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
-client.login("token");
+client.login("NzM3MzM5NzYzNjk0MTA4NzUz.Xx77Kg.yyJ6_zRPoEsWVHPRLGJNsfAwANo");
 const fetch = require("node-fetch");
 const fs = require('fs')
-
+const express = require("express");
+const app = express();
+app.use(express.static("public"));
+const url = require("url");
+const path = require("path");
 setInterval(() => {
   var links = db.get("linkler");
   if(!links) return;
@@ -26,12 +30,12 @@ db.set("linkler", [])
 })
 
 client.on("ready", () => {
-  client.user.setActivity(`u.help | ${db.get("linkler").length} / ${client.guilds.size}`)
+  client.user.setActivity(`Site kodlanıyor by cenap / uptime system by mertbhey`)
   console.log(`Logined`)
 })
 
 
-client.on("message", message => {
+/*client.on("message", message => {
   if(message.author.bot) return;
   var spl = message.content.split(" ");
   if(spl[0] == "u.add") {
@@ -56,10 +60,10 @@ client.on("message", message => {
 }})
 
 
-
+*/
 const Discord = require('discord.js');
 
-client.on("message", message => {
+/*client.on("message", message => {
   if(message.author.bot) return;
     var spl = message.content.split(" ");
   if(spl[0] == "u.help") {
@@ -80,8 +84,8 @@ let embed = new Discord.RichEmbed()
 .setFooter(`2020 © Uptime | Coded by MertBhey, Edited by Alfonzo.`, client.user.avatarURL)
 return message.channel.send(embed);
     }
- 
-})
+ *
+})*/
 
 
 /*client.on("message", message => {
@@ -100,8 +104,7 @@ message.channel.send(`**Uptime Bot Commands v1.0**
  
 })*/
 
-
-client.on("message", async message => {
+/*client.on("message", async message => {
 
   if(!message.content.startsWith("u.eval")) return;
   if(!["689169122604744833","689169122604744833"].includes(message.author.id)) return;
@@ -136,7 +139,7 @@ client.on("message", async message => {
           message.channel.send(`\`\`\`js\n${err}\n\`\`\``);
       }
   })
-  
+  */
   const log = message => {
   console.log(`${message}`);
 }
