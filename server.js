@@ -53,11 +53,11 @@ app.get("/addlink", (req, res) => {
   renderTemplate(res, req, "addlink.ejs");
 });
 app.post("/addlink", (req, res) => {
-  let ayar = req.body;
+  let ayar = JSON.stringify(req.body);
 
  /* if (!ayar["link"]) return res.send("Ya abicim tüm herşey'i doldurmadın");
   res.send("Ayarladığın link " +ayar["link"])*/
-  res.send(req.body)
+  res.send(ayar)
 });
 
 const listener = app.listen(process.env.PORT, () => {
