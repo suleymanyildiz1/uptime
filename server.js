@@ -6,12 +6,47 @@ const client = new discord.Client({ disableEveryone: true });
 client.login("NzM3MzM5NzYzNjk0MTA4NzUz.Xx77Kg.yyJ6_zRPoEsWVHPRLGJNsfAwANo");
 const fetch = require("node-fetch");
 const fs = require('fs')
+
+// server.js
+// where your node app starts
+
+// we've started you off with Express (https://expressjs.com/)
+// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
+
+// make all the files in 'public' available
+// https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
+
+// https://expressjs.com/en/starter/basic-routing.html
+
+const Discord = require("discord.js");
+const client = new Discord.Client();
+const request = require("request");
+const db = require("quick.db");
+const fs = require("fs");
 const url = require("url");
 const path = require("path");
+
+client.on('ready', () => {
+  console.log(`Site hazır ve acılan hesap : ${client.user.tag}!`);
+});
+  app.use(
+    "/css",
+    express.static(path.resolve(__dirname + `/css`))
+  );
+
   const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
+
+  app.locals.domain = process.env.PROJECT_DOMAIN;
+const router = express.Router();
+  // SITE DOSYASI AKTIF
+ var Ddos = require('ddos')
+    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
+    app.use(ddos.express);
+  app.engine("html", require("ejs").renderFile);
+  app.set("view engine", "html");
 
   var bodyParser = require("body-parser");
   app.use(bodyParser.json());
@@ -26,6 +61,33 @@ const path = require("path");
       Object.assign(baseData, data)
     );
   };
+app.use('/', router);
+app.use('/status', router);
+  app.get("/", (req, res) => {
+    renderTemplate(res, req, "index.ejs");
+  });
+  app.get("/status", (req, res) => {
+    renderTemplate(res, req, "status.ejs");
+  });
+  app.get("/", (req, res) => {
+ var Ddos = require('ddos')
+    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
+    app.use(ddos.express);
+  });
+
+
+  app.get("/status", (req, res) => {
+ var Ddos = require('ddos')
+    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
+    app.use(ddos.express);
+
+  });
+
+client.login("NzM0NDk3OTg5OTA0ODI2NDQw.XxSkqw.RnNv1r5FOb8kqyW8wwKemKNbFes");
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Panel şu portla başlatıldı:" + listener.address().port);
+});
+
 setInterval(() => {
   var links = db.get("linkler");
   if(!links) return;
@@ -48,10 +110,6 @@ client.on("ready", () => {
   client.user.setActivity(`Site kodlanıyor by cenap / uptime system by mertbhey`)
   console.log(`Logined`)
 })
-
-  app.get("/", (req, res) => {
-    renderTemplate(res, req, "index.ejs");
-  });
 
 /*client.on("message", message => {
   if(message.author.bot) return;
