@@ -57,7 +57,7 @@ app.post("/addlink", (req, res) => {
 
  /* if (!ayar["link"]) return res.send("Ya abicim tüm herşey'i doldurmadın");
   res.send("Ayarladığın link " +ayar["link"])*/
-  res.send(ayar)
+  res.send(req.body)
 });
 
 const listener = app.listen(process.env.PORT, () => {
