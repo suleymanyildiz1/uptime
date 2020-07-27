@@ -11,6 +11,21 @@ const app = express();
 app.use(express.static("public"));
 const url = require("url");
 const path = require("path");
+  const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
+
+  var bodyParser = require("body-parser");
+  app.use(bodyParser.json());
+
+  const renderTemplate = (res, req, template, data = {}) => {
+    const baseData = {
+      bot:client,
+      path: req.path
+    };
+    res.render(
+      path.resolve(`${templateDir}${path.sep}${template}`),
+      Object.assign(baseData, data)
+    );
+  };
 setInterval(() => {
   var links = db.get("linkler");
   if(!links) return;
@@ -34,6 +49,9 @@ client.on("ready", () => {
   console.log(`Logined`)
 })
 
+  app.get("/", (req, res) => {
+    renderTemplate(res, req, "index.ejs");
+  });
 
 /*client.on("message", message => {
   if(message.author.bot) return;
