@@ -1,11 +1,22 @@
 <html>
   <head>
-    
+    <title>Hoşgeldiniz biz burda sitenizi uptime ediyok</title>
   </head>
   
   <body>
-    
-    selam
-    
+    <table>
+      <tbody>
+      <tr>
+        <td> toplam eklenen link :</td>
+        <td><%= db.get("linkler").length%> </td>
+        </tr>
+        <tr>
+        <td>
+          Ekleme form'u
+          </td>
+          <td><a href="/addlink">Tıkla!</a></td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>

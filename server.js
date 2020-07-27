@@ -21,30 +21,14 @@ app.use(express.static("public"));
 
 // https://expressjs.com/en/starter/basic-routing.html
 
-const Discord = require("discord.js");
-const client = new Discord.Client();
 const request = require("request");
-const db = require("quick.db");
-const fs = require("fs");
 const url = require("url");
 const path = require("path");
-
-client.on('ready', () => {
-  console.log(`Site hazır ve acılan hesap : ${client.user.tag}!`);
-});
-  app.use(
-    "/css",
-    express.static(path.resolve(__dirname + `/css`))
-  );
 
   const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
 
   app.locals.domain = process.env.PROJECT_DOMAIN;
-const router = express.Router();
-  // SITE DOSYASI AKTIF
- var Ddos = require('ddos')
-    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
-    app.use(ddos.express);
+
   app.engine("html", require("ejs").renderFile);
   app.set("view engine", "html");
 
@@ -54,36 +38,22 @@ const router = express.Router();
   const renderTemplate = (res, req, template, data = {}) => {
     const baseData = {
       bot:client,
-      path: req.path
+      path: req.path,
+      db: db
     };
     res.render(
       path.resolve(`${templateDir}${path.sep}${template}`),
       Object.assign(baseData, data)
     );
   };
-app.use('/', router);
-app.use('/status', router);
   app.get("/", (req, res) => {
     renderTemplate(res, req, "index.ejs");
   });
-  app.get("/status", (req, res) => {
-    renderTemplate(res, req, "status.ejs");
-  });
-  app.get("/", (req, res) => {
- var Ddos = require('ddos')
-    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
-    app.use(ddos.express);
+  app.get("/addlink", (req, res) => {
+    renderTemplate(res, req, "addlink.ejs");
   });
 
 
-  app.get("/status", (req, res) => {
- var Ddos = require('ddos')
-    var ddos = new Ddos({burst:3,limit:4,maxcount:15,maxexpiry:120,checkinterval:1,testmode:false,responseStatus:429,errormessage:'atmalan ddos'});
-    app.use(ddos.express);
-
-  });
-
-client.login("NzM0NDk3OTg5OTA0ODI2NDQw.XxSkqw.RnNv1r5FOb8kqyW8wwKemKNbFes");
 const listener = app.listen(process.env.PORT, () => {
   console.log("Panel şu portla başlatıldı:" + listener.address().port);
 });
