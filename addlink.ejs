@@ -5,9 +5,15 @@
   
   <body>
     <center>
- <form method="POST" id="editform" onsubmit="disableButton(this); return true">
-      <input class="input" style="width:240px" type="text" name="botid" value="" placeholder="https://botuptimesystem.glitch.me/">
+ <form method="POST">
+                      <div class="input-group">
+              <input type="text" name="kodisim" id="kodisim" class="form-control" placeholder="Link">
+              <div class="input-group-append" id="button-addon4">
+              </div>
+      <input class="input" style="width:240px" type="url"  name="link" id="link" placeholder="https://botuptimesystem.glitch.me/">
+   
    <br>
+   
    <button class="ui colorr button " type="submit" value="Gönder">Gönder</button>
     </form>
       </center>

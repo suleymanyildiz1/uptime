@@ -5,7 +5,7 @@ const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
 client.login("NzM3MzM5NzYzNjk0MTA4NzUz.Xx77Kg.yyJ6_zRPoEsWVHPRLGJNsfAwANo");
 const fetch = require("node-fetch");
-const fs = require('fs')
+const fs = require("fs");
 
 // server.js
 // where your node app starts
@@ -25,34 +25,40 @@ const request = require("request");
 const url = require("url");
 const path = require("path");
 
-  const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
+const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
 
-  app.locals.domain = process.env.PROJECT_DOMAIN;
+app.locals.domain = process.env.PROJECT_DOMAIN;
 
-  app.engine("html", require("ejs").renderFile);
-  app.set("view engine", "html");
+app.engine("html", require("ejs").renderFile);
+app.set("view engine", "html");
 
-  var bodyParser = require("body-parser");
-  app.use(bodyParser.json());
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
-  const renderTemplate = (res, req, template, data = {}) => {
-    const baseData = {
-      bot:client,
-      path: req.path,
-      db: db
-    };
-    res.render(
-      path.resolve(`${templateDir}${path.sep}${template}`),
-      Object.assign(baseData, data)
-    );
+const renderTemplate = (res, req, template, data = {}) => {
+  const baseData = {
+    bot: client,
+    path: req.path,
+    db: db
   };
-  app.get("/", (req, res) => {
-    renderTemplate(res, req, "index.ejs");
-  });
-  app.get("/addlink", (req, res) => {
-    renderTemplate(res, req, "addlink.ejs");
-  });
+  res.render(
+    path.resolve(`${templateDir}${path.sep}${template}`),
+    Object.assign(baseData, data)
+  );
+};
+app.get("/", (req, res) => {
+  renderTemplate(res, req, "index.ejs");
+});
+app.get("/addlink", (req, res) => {
+  renderTemplate(res, req, "addlink.ejs");
+});
+app.post("/addlink", (req, res) => {
+  let ayar = req.body;
 
+ /* if (!ayar["link"]) return res.send("Ya abicim tüm herşey'i doldurmadın");
+  res.send("Ayarladığın link " +ayar["link"])*/
+  res.send(ayar)
+});
 
 const listener = app.listen(process.env.PORT, () => {
   console.log("Panel şu portla başlatıldı:" + listener.address().port);
@@ -60,26 +66,30 @@ const listener = app.listen(process.env.PORT, () => {
 
 setInterval(() => {
   var links = db.get("linkler");
-  if(!links) return;
-  var linkA = links.map(c => c.url)
+  if (!links) return;
+  var linkA = links.map(c => c.url);
   linkA.forEach(link => {
     try {
-      fetch(link)
-    } catch(e) { console.log("" + e) };
-  })
-  console.log("Pong! Requests sent")
-}, 60000)
+      fetch(link);
+    } catch (e) {
+      console.log("" + e);
+    }
+  });
+  console.log("Pong! Requests sent");
+}, 60000);
 
 client.on("ready", () => {
-if(!Array.isArray(db.get("linkler"))) {
-db.set("linkler", [])
-}
-})
+  if (!Array.isArray(db.get("linkler"))) {
+    db.set("linkler", []);
+  }
+});
 
 client.on("ready", () => {
-  client.user.setActivity(`Site kodlanıyor by cenap / uptime system by mertbhey`)
-  console.log(`Logined`)
-})
+  client.user.setActivity(
+    `Site kodlanıyor by cenap / uptime system by mertbhey`
+  );
+  console.log(`Logined`);
+});
 
 /*client.on("message", message => {
   if(message.author.bot) return;
@@ -107,7 +117,7 @@ client.on("message", message => {
 
 
 */
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 /*client.on("message", message => {
   if(message.author.bot) return;
@@ -132,7 +142,6 @@ return message.channel.send(embed);
     }
  *
 })*/
-
 
 /*client.on("message", message => {
   if(message.author.bot) return;
@@ -186,8 +195,6 @@ message.channel.send(`**Uptime Bot Commands v1.0**
       }
   })
   */
-  const log = message => {
+const log = message => {
   console.log(`${message}`);
-}
-  
-  
+};
