@@ -34,7 +34,8 @@ app.set("view engine", "html");
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
 const renderTemplate = (res, req, template, data = {}) => {
   const baseData = {
     bot: client,
@@ -53,11 +54,15 @@ app.get("/addlink", (req, res) => {
   renderTemplate(res, req, "addlink.ejs");
 });
 app.post("/addlink", (req, res) => {
-  let ayar = JSON.stringify(req.body);
+  let ayar = req.body;
+let link = ayar["link"]
+ if (!ayar["link"]) return res.send("Link'i doldurmadın");
+if(db.get("linkler").map(z => z.url).includes(link)){
+  return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan")
+} else {
+      db.push("linkler", { url: link, owner: ""})
+}
 
- /* if (!ayar["link"]) return res.send("Ya abicim tüm herşey'i doldurmadın");
-  res.send("Ayarladığın link " +ayar["link"])*/
-  res.send(ayar)
 });
 
 const listener = app.listen(process.env.PORT, () => {
