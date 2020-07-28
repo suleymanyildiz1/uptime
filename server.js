@@ -10,18 +10,10 @@ const fs = require("fs");
   "737669686883516498",
   "X5vV9dX08B2GLLrE7WlSrcOhd6BmDBopJno9jAEO4ystn-58JfGOc_XJKGBjN0w14L3e"
 );*/
-// where your node app starts
-
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
-
-// https://expressjs.com/en/starter/basic-routing.html
 
 const request = require("request");
 const url = require("url");
