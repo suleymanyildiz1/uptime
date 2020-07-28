@@ -10,8 +10,9 @@
   </head>
   
   <body>
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Ana Sayfa</a>
+<img src="https://cdn.discordapp.com/avatars/727978641702649966/f3ce07e33e26a69f2912f07e9b0aaceb.png?size=2048" style="width: 50px; height: 50px; border-radius: 50px;" alt="Logo">  <a class="navbar-brand" href="/">BotUptimeSystem</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,6 +30,7 @@
     </ul>
   </div>
 </nav>
+    <center>
     <table>
       <tbody>
       <tr>
@@ -41,7 +43,12 @@
           </td>
           <td><a href="/addlink">Tıkla!</a></td>
         </tr>
+        <tr>
+        <td>Sitede Calısın bot'un ping'i</td>
+        <td><%=Math.round(bot.ping)%> MS</td>
+        </tr>
       </tbody>
     </table>
   </body>
+    </center>
 </html>
