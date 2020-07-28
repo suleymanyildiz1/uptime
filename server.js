@@ -60,7 +60,13 @@ let link = ayar["link"]
 if(db.get("linkler").map(z => z.url).includes(link)){
   return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan")
 } else {
-      db.push("linkler", { url: link, owner: ""})
+      let ekleyen = '';
+    let dict = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for(var i = 0; i < 18; i++){
+        ekleyen = ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
+    }
+      db.push("linkler", { url: link, owner: ekleyen})
+  res.send("kardeşim ekledin al ama bişe vercem bunu kimseyle paylaşma sende kalsın tamam'ı neyse sen bu kodu al botuna fln kaydet sorun yaşarsan direk silicez. kodun; "+ ekleyen)
 }
 
 });
