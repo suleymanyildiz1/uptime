@@ -172,27 +172,19 @@ client.on("ready", () => {
     let link = ayar["link"];
     if (!ayar["link"]) return res.send("Link'i doldurmadın");
 
-
-      /*     let ekleyen = "";
+    /*     let ekleyen = "";
       let dict =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       for (var i = 0; i < 18; i++) {
         ekleyen =
           ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
       }*/
-            fetch(link).then(() => {
-if (db.get("linkler").map(z => z.url).includes(link)) {
-      return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");}
-              else {
-     db.push("linkler", { url: link, owner: req.user.id });
-       res.send("eklendi " + req.user.id);
-  }}).catch(e => {
-    res.send("hata: " + e)
-  }
-            )
-            
-      
-    
+ if(db.get("linkler").map(z => z.url).includes(link)) {
+      return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");
+    } else {
+      db.push("linkler", { url: link, owner: req.user.id });
+      res.send("eklendi " + req.user.id);
+    }
   });
 
   const listener = app.listen(process.env.PORT, () => {
