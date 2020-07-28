@@ -30,9 +30,18 @@ Siteyi kopyalamadan önce "https://uptimesystem.ml/license" (28.07.2020 de şu a
       <li class="nav-item">
         <a class="nav-link" href="/addlink">Link ekle</a>
       </li>
+      <% if(!user) {%>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Giriş / Yakında(doğrusu üşendim kodlarıda var elimde jsdsıkd)</a>
+        <a class="nav-link" href="/giris">Giriş</a>
       </li>
+      <% } else { %>
+            <li class="nav-item">
+        <a class="nav-link" href="/cikis">Cıkış</a>
+      </li>
+                  <li class="nav-item">
+        <a class="nav-link disabled" href="#">Panel</a>
+      </li>
+      <%} %>
     </ul>
   </div>
 </nav>

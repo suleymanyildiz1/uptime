@@ -35,16 +35,14 @@ app.set("view engine", "html");
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
- 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 passport.serializeUser((user, done) => {
-done(null, user);
+  done(null, user);
 });
 passport.deserializeUser((obj, done) => {
-done(null, obj);
+  done(null, obj);
 });
-
-
 
 setInterval(() => {
   var links = db.get("linkler");
@@ -57,8 +55,8 @@ setInterval(() => {
       console.log("" + e);
     }
   });
-  let zaman = new Date;
- /* hook.send(`Pong! Tüm linkler'e izleme gönderildi zaman; ${zaman}`)*/
+  let zaman = new Date();
+  /* hook.send(`Pong! Tüm linkler'e izleme gönderildi zaman; ${zaman}`)*/
   console.log("Pong! Requests sent");
 }, 60000);
 
@@ -72,67 +70,121 @@ client.on("ready", () => {
   client.user.setActivity(
     `Site kodlanıyor by cenap / uptime system by mertbhey`
   );
-  passport.use(new Strategy({
-clientID: "",
-clientSecret: client.ayarlar.oauthSecret,
-callbackURL: client.ayarlar.callbackURL,
-scope: ["identify"]
-},
-(accessToken, refreshToken, profile, done) => {
-process.nextTick(() => done(null, profile));
-}));
-
-app.use(session({
-secret: '123',
-resave: false,
-saveUninitialized: false,
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(helmet());
-
-const renderTemplate = (res, req, template, data = {}) => {
-  const baseData = {
-    bot: client,
-    path: req.path,
-    db: db
-  };
-  res.render(
-    path.resolve(`${templateDir}${path.sep}${template}`),
-    Object.assign(baseData, data)
+  passport.use(
+    new Strategy(
+      {
+        clientID: "737339763694108753",
+        clientSecret: "W7oneD8yLIW21uNFz5g09j_QxAhhG-pN",
+        callbackURL: "https://www.uptimesystem.ml/callback",
+        scope: ["identify"]
+      },
+      (accessToken, refreshToken, profile, done) => {
+        process.nextTick(() => done(null, profile));
+      }
+    )
   );
-};
-app.get("/", (req, res) => {
-  renderTemplate(res, req, "index.ejs");
-});
-app.get("/addlink", (req, res) => {
-  renderTemplate(res, req, "addlink.ejs");
-});
-app.get("/404", (req, res) => {
-  renderTemplate(res, req, "404.html");
-});
-app.post("/addlink", (req, res) => {
-  let ayar = req.body;
-let link = ayar["link"]
- if (!ayar["link"]) return res.send("Link'i doldurmadın");
-if(db.get("linkler").map(z => z.url).includes(link)){
-  return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan")
-} else {
-      let ekleyen = '';
-    let dict = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    for(var i = 0; i < 18; i++){
-        ekleyen = ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
-    }
-      db.push("linkler", { url: link, owner: ekleyen})
-  res.send("kardeşim ekledin al ama bişe vercem bunu kimseyle paylaşma sende kalsın tamam'ı neyse sen bu kodu al botuna fln kaydet sorun yaşarsan direk silicez. kodun; "+ ekleyen)
+
+  app.use(
+    session({
+      secret: "123",
+      resave: false,
+      saveUninitialized: false
+    })
+  );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(helmet());
+
+  const renderTemplate = (res, req, template, data = {}) => {
+    const baseData = {
+      bot: client,
+      path: req.path,
+      db: db,
+      user: req.isAuthenticated() ? req.user : null
+    };
+    res.render(
+      path.resolve(`${templateDir}${path.sep}${template}`),
+      Object.assign(baseData, data)
+    );
+  };
+  app.get("/giris", (req, res, next) => {
+if (req.session.backURL) {
+req.session.backURL = req.session.backURL;
+} else if (req.headers.referer) {
+const parsed = url.parse(req.headers.referer);
+if (parsed.hostname === app.locals.domain) {
+req.session.backURL = parsed.path;
 }
-
+} else {
+req.session.backURL = "/";
+}
+next();
+},
+passport.authenticate("discord"));
+  
+  app.get("/cikis", function(req, res) {
+req.session.destroy(() => {
+req.logout();
+res.redirect("/");
 });
-
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Panel şu portla başlatıldı:" + listener.address().port);
 });
+  
+  function checkAuth(req, res, next) {
+if (req.isAuthenticated()) return next();
+req.session.backURL = req.url;
+res.redirect("/giris");
+}
+  
+  app.get("/autherror", (req, res) => {
+res.send("Kardeşim kardeşim bağlantı hatası verdi diyor sistem geri gidip tekrar giriş yaparmısın")
+});
+  
+app.get("/callback", passport.authenticate("discord", { failureRedirect: "/autherror" }), async (req, res) => {
+if (req.session.backURL) {
+const url = req.session.backURL;
+req.session.backURL = null;
+res.redirect(url);
+} else {
+res.redirect("/");
+}
+});
+  app.get("/", (req, res) => {
+    renderTemplate(res, req, "index.ejs");
+  });
+  app.get("/addlink", checkAuth , (req, res) => {
+    renderTemplate(res, req, "addlink.ejs");
+  });
+  app.get("/404", (req, res) => {
+    renderTemplate(res, req, "404.html");
+  });
+  app.post("/addlink", checkAuth, (req, res) => {
+    let ayar = req.body;
+    let link = ayar["link"];
+    if (!ayar["link"]) return res.send("Link'i doldurmadın");
+    if (
+      db
+        .get("linkler")
+        .map(z => z.url)
+        .includes(link)
+    ) {
+      return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");
+    } else {
+ /*     let ekleyen = "";
+      let dict =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      for (var i = 0; i < 18; i++) {
+        ekleyen =
+          ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
+      }*/
+      db.push("linkler", { url: link, owner: req.user.id });
+
+    }
+  });
+
+  const listener = app.listen(process.env.PORT, () => {
+    console.log("Panel şu portla başlatıldı:" + listener.address().port);
+  });
   console.log(`Logined`);
 });
 
