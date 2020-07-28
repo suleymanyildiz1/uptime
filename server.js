@@ -171,14 +171,8 @@ client.on("ready", () => {
     let ayar = req.body;
     let link = ayar["link"];
     if (!ayar["link"]) return res.send("Link'i doldurmadın");
-    if (
-      db
-        .get("linkler")
-        .map(z => z.url)
-        .includes(link)
-    ) {
-      return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");
-    } else {
+
+
       /*     let ekleyen = "";
       let dict =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -186,13 +180,19 @@ client.on("ready", () => {
         ekleyen =
           ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
       }*/
-
-            db.push("linkler", { url: link, owner: req.user.id });
-            res.send("eklendi " + req.user.id);
-          
-        
+            fetch(link).then(() => {
+if (db.get("linkler").map(z => z.url).includes(link)) {
+      return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");}
+              else {
+     db.push("linkler", { url: link, owner: req.user.id });
+       res.send("eklendi " + req.user.id);
+  }}).catch(e => {
+    res.send("hata: " + e)
+  }
+            )
+            
       
-    }
+    
   });
 
   const listener = app.listen(process.env.PORT, () => {
