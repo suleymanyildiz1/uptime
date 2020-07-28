@@ -12,12 +12,19 @@ const fs = require("fs");
 );*/
 const express = require("express");
 const app = express();
+const helmet = require("helmet");
+
+const md = require("marked");
 
 app.use(express.static("public"));
 
 const request = require("request");
 const url = require("url");
 const path = require("path");
+const passport = require("passport");
+const session = require("express-session");
+const LevelStore = require("level-session-store")(session);
+const Strategy = require("passport-discord").Strategy;
 
 const templateDir = path.resolve(__dirname + `/`); // SITE DOSYA KONTROL
 
@@ -30,6 +37,61 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
  
+passport.serializeUser((user, done) => {
+done(null, user);
+});
+passport.deserializeUser((obj, done) => {
+done(null, obj);
+});
+
+
+
+setInterval(() => {
+  var links = db.get("linkler");
+  if (!links) return;
+  var linkA = links.map(c => c.url);
+  linkA.forEach(link => {
+    try {
+      fetch(link);
+    } catch (e) {
+      console.log("" + e);
+    }
+  });
+  let zaman = new Date;
+ /* hook.send(`Pong! Tüm linkler'e izleme gönderildi zaman; ${zaman}`)*/
+  console.log("Pong! Requests sent");
+}, 60000);
+
+client.on("ready", () => {
+  if (!Array.isArray(db.get("linkler"))) {
+    db.set("linkler", []);
+  }
+});
+
+client.on("ready", () => {
+  client.user.setActivity(
+    `Site kodlanıyor by cenap / uptime system by mertbhey`
+  );
+  passport.use(new Strategy({
+clientID: "",
+clientSecret: client.ayarlar.oauthSecret,
+callbackURL: client.ayarlar.callbackURL,
+scope: ["identify"]
+},
+(accessToken, refreshToken, profile, done) => {
+process.nextTick(() => done(null, profile));
+}));
+
+app.use(session({
+secret: '123',
+resave: false,
+saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(helmet());
+
 const renderTemplate = (res, req, template, data = {}) => {
   const baseData = {
     bot: client,
@@ -71,33 +133,6 @@ if(db.get("linkler").map(z => z.url).includes(link)){
 const listener = app.listen(process.env.PORT, () => {
   console.log("Panel şu portla başlatıldı:" + listener.address().port);
 });
-
-setInterval(() => {
-  var links = db.get("linkler");
-  if (!links) return;
-  var linkA = links.map(c => c.url);
-  linkA.forEach(link => {
-    try {
-      fetch(link);
-    } catch (e) {
-      console.log("" + e);
-    }
-  });
-  let zaman = new Date;
- /* hook.send(`Pong! Tüm linkler'e izleme gönderildi zaman; ${zaman}`)*/
-  console.log("Pong! Requests sent");
-}, 60000);
-
-client.on("ready", () => {
-  if (!Array.isArray(db.get("linkler"))) {
-    db.set("linkler", []);
-  }
-});
-
-client.on("ready", () => {
-  client.user.setActivity(
-    `Site kodlanıyor by cenap / uptime system by mertbhey`
-  );
   console.log(`Logined`);
 });
 
