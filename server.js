@@ -108,51 +108,60 @@ client.on("ready", () => {
       Object.assign(baseData, data)
     );
   };
-  app.get("/giris", (req, res, next) => {
-if (req.session.backURL) {
-req.session.backURL = req.session.backURL;
-} else if (req.headers.referer) {
-const parsed = url.parse(req.headers.referer);
-if (parsed.hostname === app.locals.domain) {
-req.session.backURL = parsed.path;
-}
-} else {
-req.session.backURL = "/";
-}
-next();
-},
-passport.authenticate("discord"));
-  
+  app.get(
+    "/giris",
+    (req, res, next) => {
+      if (req.session.backURL) {
+        req.session.backURL = req.session.backURL;
+      } else if (req.headers.referer) {
+        const parsed = url.parse(req.headers.referer);
+        if (parsed.hostname === app.locals.domain) {
+          req.session.backURL = parsed.path;
+        }
+      } else {
+        req.session.backURL = "/";
+      }
+      next();
+    },
+    passport.authenticate("discord")
+  );
+
   app.get("/cikis", function(req, res) {
-req.session.destroy(() => {
-req.logout();
-res.redirect("/");
-});
-});
-  
+    req.session.destroy(() => {
+      req.logout();
+      res.redirect("/");
+    });
+  });
+
   function checkAuth(req, res, next) {
-if (req.isAuthenticated()) return next();
-req.session.backURL = req.url;
-res.redirect("/giris");
-}
-  
+    if (req.isAuthenticated()) return next();
+    req.session.backURL = req.url;
+    res.redirect("/giris");
+  }
+
   app.get("/autherror", (req, res) => {
-res.send("Kardeşim kardeşim bağlantı hatası verdi diyor sistem geri gidip tekrar giriş yaparmısın")
-});
-  
-app.get("/callback", passport.authenticate("discord", { failureRedirect: "/autherror" }), async (req, res) => {
-if (req.session.backURL) {
-const url = req.session.backURL;
-req.session.backURL = null;
-res.redirect(url);
-} else {
-res.redirect("/");
-}
-});
+    res.send(
+      "Kardeşim kardeşim bağlantı hatası verdi diyor sistem geri gidip tekrar giriş yaparmısın"
+    );
+  });
+
+  app.get(
+    "/callback",
+    passport.authenticate("discord", { failureRedirect: "/autherror" }),
+    async (req, res) => {
+      if (req.session.backURL) {
+        const url = req.session.backURL;
+        req.session.backURL = null;
+        res.redirect(url);
+      } else {
+        res.redirect("/");
+      }
+    }
+  );
   app.get("/", (req, res) => {
     renderTemplate(res, req, "index.ejs");
   });
-  app.get("/addlink", checkAuth , (req, res) => {
+  app.get("/addlink", checkAuth, (req, res) => {
     renderTemplate(res, req, "addlink.ejs");
   });
   app.get("/404", (req, res) => {
@@ -170,15 +179,19 @@ res.redirect("/");
     ) {
       return res.send("Kardeş zaten var ne ekliyip sistemi zorlarlıştırcan");
     } else {
- /*     let ekleyen = "";
+      /*     let ekleyen = "";
       let dict =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       for (var i = 0; i < 18; i++) {
         ekleyen =
           ekleyen + dict.charAt(Math.floor(Math.random() * dict.length));
       }*/
-      db.push("linkler", { url: link, owner: req.user.id });
 
+            db.push("linkler", { url: link, owner: req.user.id });
+            res.send("eklendi " + req.user.id);
+          
+        
+      
     }
   });
 
