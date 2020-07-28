@@ -47,6 +47,9 @@ app.get("/", (req, res) => {
 app.get("/addlink", (req, res) => {
   renderTemplate(res, req, "addlink.ejs");
 });
+app.get("/404", (req, res) => {
+  renderTemplate(res, req, "404.html");
+});
 app.post("/addlink", (req, res) => {
   let ayar = req.body;
 let link = ayar["link"]
