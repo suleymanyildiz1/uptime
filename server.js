@@ -6,8 +6,10 @@ const client = new discord.Client({ disableEveryone: true });
 client.login("NzM3MzM5NzYzNjk0MTA4NzUz.Xx77Kg.yyJ6_zRPoEsWVHPRLGJNsfAwANo");
 const fetch = require("node-fetch");
 const fs = require("fs");
-
-// server.js
+const hook = new discord.WebhookClient(
+  "737669686883516498",
+  "X5vV9dX08B2GLLrE7WlSrcOhd6BmDBopJno9jAEO4ystn-58JfGOc_XJKGBjN0w14L3e"
+);
 // where your node app starts
 
 // we've started you off with Express (https://expressjs.com/)
@@ -86,6 +88,8 @@ setInterval(() => {
       console.log("" + e);
     }
   });
+  let zaman = new Date;
+  hook.send(`Pong! Tüm linkler'e izleme gönderildi zaman; ${zaman}`)
   console.log("Pong! Requests sent");
 }, 60000);
 
