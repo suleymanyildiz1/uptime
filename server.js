@@ -192,7 +192,7 @@ client.on("ready", () => {
   });
   console.log(`Logined`);
 });
-
+console.log(db.get("linkler").map(z => z.url).includes("https://thyke-.glitch.me/")
 /*client.on("message", message => {
   if(message.author.bot) return;
   var spl = message.content.split(" ");
