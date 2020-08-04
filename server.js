@@ -13,6 +13,8 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
+const moment = require('moment');
+console.log(`${moment().locale('tr').format('LLLL')}`)
 
 const md = require("marked");
 
