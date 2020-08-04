@@ -103,7 +103,8 @@ client.on("ready", () => {
       bot: client,
       path: req.path,
       db: db,
-      user: req.isAuthenticated() ? req.user : null
+      user: req.isAuthenticated() ? req.user : null,
+      saat: `${moment().locale('tr').format('LLL')}`
     };
     res.render(
       path.resolve(`${templateDir}${path.sep}${template}`),
