@@ -104,9 +104,11 @@ client.on("ready", () => {
   var sahip = links.map(c => c.owner);
       try {
 linkss = linkA
+ sahipp = sahip
     } catch (e) {
       console.log("" + e);
     }
+  
   const renderTemplate = (res, req, template, data = {}) => {
     const baseData = {
       bot: client,
@@ -114,7 +116,8 @@ linkss = linkA
       db: db,
       user: req.isAuthenticated() ? req.user : null,
       saat: `${moment().locale('tr').format('LLL')}`,
-      linkss: linkss
+      linkss: linkss,
+      sahipp: sahipp
     };
     res.render(
       path.resolve(`${templateDir}${path.sep}${template}`),
@@ -180,9 +183,7 @@ linkss = linkA
   app.get("/404", (req, res) => {
     renderTemplate(res, req, "404.html");
   });
-    app.get("/testananagirsin", (req, res) => {
-    renderTemplate(res, req, "testing.ejs");
-  });
+   
   app.post("/addlink", checkAuth, (req, res) => {
     let ayar = req.body;
     let link = ayar["link"];
