@@ -96,15 +96,25 @@ client.on("ready", () => {
 
   app.use(passport.initialize());
   app.use(passport.session());
+  let linkss;
   app.use(helmet());
-
+  let links = db.get("linkler");
+  let sahipp;
+  var linkA = links.map(c => c.url);
+  var sahip = links.map(c => c.owner);
+      try {
+linkss = linkA
+    } catch (e) {
+      console.log("" + e);
+    }
   const renderTemplate = (res, req, template, data = {}) => {
     const baseData = {
       bot: client,
       path: req.path,
       db: db,
       user: req.isAuthenticated() ? req.user : null,
-      saat: `${moment().locale('tr').format('LLL')}`
+      saat: `${moment().locale('tr').format('LLL')}`,
+      linkss: linkss
     };
     res.render(
       path.resolve(`${templateDir}${path.sep}${template}`),
