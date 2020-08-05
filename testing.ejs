@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html style="background-color: #4ca74c; overflow-y: auto;">
+	<head>    
+<title>Uptime</title>
+  		<meta name="keywords" content="Discord, Discord bots, Discord bot, Asuna, Asuna Discord, Asuna bot, Asunaa, asunamie, Asunamie, Asunamie bot">
+    <link rel="stylesheet" href="https://sitedatas.glitch.me/bulma.css">
+		<link rel="stylesheet" href="https://sitedatas.glitch.me/font-awesome.min.css">
+		<link rel="stylesheet" href="https://sitedatas.glitch.me/main.css">
+     <link rel="stylesheet" href="https://sitedatas.glitch.me/uptime-bootstrap.min.css">
+
+		<style>
+			.status td {
+				text-align: center !important;
+				padding: 2px;
+			}
+			.status thead {
+				border-bottom: 1px solid #ddd;
+			}
+			.status th:first-child, .status td:first-child { 
+    			font-weight: bolder;
+			}
+			.premium td {
+				text-align: center !important;
+				padding: 15px;
+			}
+			.premium th, .premium td {
+				border-bottom: 1px solid #ddd;
+			}
+			.premium th:first-child, .premium td:first-child { 
+    			font-weight: bolder;
+			}
+			#particle-js {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: 50% 50%;
+				opacity: 0.48;
+			}
+			canvas {
+				position: fixed;
+			}
+			@media screen and (max-width: 770px) {
+				.hero-body {
+					padding: 0px !important;
+					padding-top: 3em !important;
+				}
+			}
+			.circle:before {
+				content: ' \25CF';
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<div class="navbar-brand">
+  <a href="/">
+<img class="img-fluid" style="width: 35px; border-radius: 20px;"src="https://cdn.discordapp.com/avatars/727978641702649966/f3ce07e33e26a69f2912f07e9b0aaceb.png?size=2048">
+  </a>
+    </div>
+
+
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" style="color:#7289da" href="/addlink">Ekle </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" style="color:red" href="#?text=beta"><b>Site Beta halindedir. Bulduğunuz hataları/bugları bildirin.</b></a>
+</li>
+</ul>
+    
+      <%if(user) {%>
+  
+<ul class="navbar-nav">
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<img src="https://cdn.discordapp.com/avatars/<%=user.id%>/<%=user.avatar%>" height="30" style="border-radius: 50px;" alt="user pp"> <%= user.username %></a>
+</a>
+<ul class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="dropdown">
+<li><a class="dropdown-item" href="/profile" style="color:#7289da">Profil</a></li>
+<li><a class="dropdown-item" href="/panel" style="color:#7289da">Sunucularım</a></li>
+<li><div class="dropdown-divider"></div></li>
+<li><a class="dropdown-item" href="/logout" style="color:#b54343"><b>Çıkış Yap</b></a></li>
+</ul>
+</li>
+</ul>
+</div>
+  
+        <%} else {%>
+
+<ul class="navbar-nav">
+<li class="nav-item">
+<li class="nav-item">
+<a href="/giris">
+<button type="button" class="btn btn-custon-four btn-success"><i aria-hidden="true"></i>Giriş Yap</button>
+</a>
+</li>
+</li>
+</ul>
+
+        <% } %>
+</div>
+</nav>
+</ul>
+</div>
+
+
+			<div class="hero-body">
+				<div class="container has-text-centered">
+					<h1 class="title">
+	<img class="aw-zoom" src="https://cdn.discordapp.com/avatars/727978641702649966/f3ce07e33e26a69f2912f07e9b0aaceb.png?size=2048" style="width: 6em; border-radius: 1000000px;">
+</h1>
+<%=db.get("linkler")%>
+</h2>
+        </div></div>

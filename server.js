@@ -170,6 +170,9 @@ client.on("ready", () => {
   app.get("/404", (req, res) => {
     renderTemplate(res, req, "404.html");
   });
+    app.get("/testananagirsin", (req, res) => {
+    renderTemplate(res, req, "testing.ejs");
+  });
   app.post("/addlink", checkAuth, (req, res) => {
     let ayar = req.body;
     let link = ayar["link"];
