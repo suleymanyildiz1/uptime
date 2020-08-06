@@ -3,7 +3,7 @@ require("express")().listen(1343);
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
-client.login("NzM3MzM5NzYzNjk0MTA4NzUz.Xx77Kg.yyJ6_zRPoEsWVHPRLGJNsfAwANo");
+client.login(process.env.TOKEN);
 const fetch = require("node-fetch");
 const fs = require("fs");
 /*const hook = new discord.WebhookClient(
@@ -76,9 +76,9 @@ client.on("ready", () => {
   passport.use(
     new Strategy(
       {
-        clientID: "737339763694108753",
-        clientSecret: "W7oneD8yLIW21uNFz5g09j_QxAhhG-pN",
-        callbackURL: "https://pc-uptimesitesi.glitch.me/callback",
+        clientID: process.env.clientID,
+        clientSecret: process.env.AuthSecret,
+        callbackURL: process.env.callbackurl,
         scope: ["identify"]
       },
       (accessToken, refreshToken, profile, done) => {
