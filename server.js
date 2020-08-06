@@ -78,7 +78,7 @@ client.on("ready", () => {
       {
         clientID: "737339763694108753",
         clientSecret: "W7oneD8yLIW21uNFz5g09j_QxAhhG-pN",
-        callbackURL: "https://www.uptimesystem.ml/callback",
+        callbackURL: "https://pc-uptimesitesi.glitch.me/callback",
         scope: ["identify"]
       },
       (accessToken, refreshToken, profile, done) => {
@@ -126,7 +126,7 @@ linkss = linkA
     );
   };
   app.get(
-    "/giris",
+    "/login",
     (req, res, next) => {
       if (req.session.backURL) {
         req.session.backURL = req.session.backURL;
@@ -143,7 +143,7 @@ linkss = linkA
     passport.authenticate("discord")
   );
 
-  app.get("/cikis", function(req, res) {
+  app.get("/logout", function(req, res) {
     req.session.destroy(() => {
       req.logout();
       res.redirect("/");
@@ -153,7 +153,7 @@ linkss = linkA
   function checkAuth(req, res, next) {
     if (req.isAuthenticated()) return next();
     req.session.backURL = req.url;
-    res.redirect("/giris");
+    res.redirect("/login");
   }
 
   app.get("/autherror", (req, res) => {
@@ -178,14 +178,14 @@ linkss = linkA
   app.get("/", (req, res) => {
     renderTemplate(res, req, "index.ejs");
   });
-  app.get("/addlink", checkAuth, (req, res) => {
-    renderTemplate(res, req, "addlink.ejs");
+  app.get("/add", checkAuth, (req, res) => {
+    renderTemplate(res, req, "add.ejs");
   });
   app.get("/404", (req, res) => {
     renderTemplate(res, req, "404.html");
   });
    
-  app.post("/addlink", checkAuth, (req, res) => {
+  app.post("/add", checkAuth, (req, res) => {
     let ayar = req.body;
     let link = ayar["link"];
     if (!ayar["link"]) return res.send("Link'i doldurmadın");
