@@ -173,18 +173,20 @@ linkss = linkA
   app.get("/", (req, res) => {
     renderTemplate(res, req, "index.ejs");
   });
-  app.get("/add", checkAuth, (req, res) => {
+  app.get("/addlink", checkAuth, (req, res) => {
     renderTemplate(res, req, "add.ejs");
   });
   app.get("/info", (req, res) => {
     renderTemplate(res, req, "info.ejs");
   });
+  
+    app.get("/testing", (req, res) => {
+    renderTemplate(res, req, "testing.ejs");
+  });
    
-  app.post("/add", checkAuth, (req, res) => {
+  app.post("/addlink", checkAuth, (req, res) => {
     let ayar = req.body;
-    res.send(req.body)
-    res.end(req.body)
-   /* let link = ayar["link"];
+  let link = ayar["link"];
     if (!ayar["link"]) return res.send("You didn't fill out the link!");
 
  if(db.get("linkler").map(z => z.url).includes(link)) {
@@ -192,7 +194,7 @@ linkss = linkA
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
       res.send("Added " + req.user.id);
-    }*/
+    }
   });
 
   const listener = app.listen(process.env.PORT, () => {

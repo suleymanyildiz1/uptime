@@ -151,14 +151,9 @@
 <form class="login100-form validate-form flex-sb flex-w">
 <span class="login-form-title p-b-53"><img style="border-radius: 50px; " height="50" src="https://cdn.discordapp.com/avatars/<%=user.id%>/<%=user.avatar%>"> <%= user.username %>#<%= user.discriminator %> </span>  
       <br>
- <form method="POST" action="/add">
+ <form method="POST" action="/addlink">
    <center>
-<input class="input" style="width:340px; text-align: center; background-color:#2c2f33" type="url" id="link" name="link" placeholder="https://www.projetName.glitch.me" required>
-   
-   <br>
-   <button type="sumbit">
-     send
-     </button>
+
 				<div style="width: 100%; text-align: center; margin-top: 20px;">
 					<button style="border-radius: 7px; background-color:#4ca74c" type="submit" class="btn btn-primary">Send<i aria-hidden='true'></i></button>
 				</div>
@@ -225,6 +220,19 @@
   </style>
 <div class="p-t-13 p-b-9">
 </div>
+     <center>
+      <br>
+ <form method="POST" action="/addlink">
+<input class="input" style="width:340px" type="url"  name="link" placeholder="https://www.uptimesystem.ml/" required>
+   
+   <br>
+   
+				<div style="width: 100%; text-align: center; margin-top: 20px;">
+					<button style="border-radius: 0px; background-color:#7289da" type="submit" class="btn btn-primary">Gönder<i aria-hidden='true'></i></button>
+				</div>
+    </form>
+      </center>
+  </body>
 <div class="wrap-input100 validate-input" data-validate="Password is required">
 <span class="focus-input100"></span>
 </div>
