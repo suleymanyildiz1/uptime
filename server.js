@@ -10,7 +10,6 @@ const express = require("express");
 const app = express();
 const helmet = require("helmet");
 const moment = require('moment');
-console.log(`${moment().locale('tr').format('LLLL')}`)
 
 const md = require("marked");
 
@@ -53,7 +52,7 @@ setInterval(() => {
     try {
       fetch(link);
     } catch (e) {
-      console.log("" + e);
+     // console.log("" + e);
     }
   });
   let zaman = new Date();
@@ -183,7 +182,9 @@ linkss = linkA
    
   app.post("/add", checkAuth, (req, res) => {
     let ayar = req.body;
-    let link = ayar["link"];
+    res.send(req.body)
+    res.end(req.body)
+   /* let link = ayar["link"];
     if (!ayar["link"]) return res.send("You didn't fill out the link!");
 
  if(db.get("linkler").map(z => z.url).includes(link)) {
@@ -191,7 +192,7 @@ linkss = linkA
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
       res.send("Added " + req.user.id);
-    }
+    }*/
   });
 
   const listener = app.listen(process.env.PORT, () => {
