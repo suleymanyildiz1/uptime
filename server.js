@@ -68,6 +68,7 @@ client.on("ready", () => {
   }
 });
 
+
 client.on("ready", () => {
   client.user.setActivity(
     `Site kodlanıyor by cenap / uptime system by mertbhey`
@@ -317,3 +318,4 @@ message.channel.send(`**Uptime Bot Commands v1.0**
 const log = message => {
   console.log(`${message}`);
 };
+
