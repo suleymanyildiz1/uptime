@@ -176,9 +176,6 @@ linkss = linkA
   app.get("/add", checkAuth, (req, res) => {
     renderTemplate(res, req, "add.ejs");
   });
-  app.get("/info", (req, res) => {
-    renderTemplate(res, req, "info.ejs");
-  });
   app.get("/profile", (req, res) => {
     renderTemplate(res, req, "profile.ejs");
   });
