@@ -23,7 +23,10 @@ const passport = require("passport");
 const session = require("express-session");
 const LevelStore = require("level-session-store")(session);
 const Strategy = require("passport-discord").Strategy;
-
+  app.use(
+    "/css",
+    express.static(path.resolve(__dirname + `/css`))
+  );
   const templateDir = path.resolve(__dirname + `/src/pages/`); 
 
 app.locals.domain = process.env.PROJECT_DOMAIN;
@@ -176,9 +179,6 @@ linkss = linkA
   });
   app.get("/info", (req, res) => {
     renderTemplate(res, req, "info.ejs");
-  });
-    app.get("/profile", (req, res) => {
-    renderTemplate(res, req, "profile.ejs");
   });
    
   app.post("/add", checkAuth, (req, res) => {

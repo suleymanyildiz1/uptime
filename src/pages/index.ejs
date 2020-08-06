@@ -1,8 +1,33 @@
               <%if(user) {%>
 
+      
 <!DOCTYPE html>
-<html style="background-color: #2c2f33; overflow-y: auto;">
-	<head>    
+<html lang="en">
+<head>
+  
+     <script src="https://reborncraft.pw/apps/main/public/assets/js/main.min.js?v=525"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(window).load(function () {
+                $('#preloader').fadeOut(1000, function () { $(this).remove(); });
+            });
+        });
+</script>
+    
+    <style type="text/css">
+    .js div#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background: #202025 url('') no-repeat center center;
+}
+    </style>
+  
 <title>Uptime</title>
 	<link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/723279024050405427/740937064371060877/uptime-site.png">
 			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,174 +36,210 @@
 		<meta property="og:description" content="English-based Uptime site made by Turkish Developers.">
 		<meta property="og:image" content="https://cdn.discordapp.com/attachments/723279024050405427/740937064371060877/uptime-site.png">
 		<meta property="theme-color" content="#2c2f33">
-	<meta charset="utf-8">  		
-    <link rel="stylesheet" href="https://sitedatas.glitch.me/bulma.css">
-		<link rel="stylesheet" href="https://sitedatas.glitch.me/font-awesome.min.css">
-		<link rel="stylesheet" href="https://sitedatas.glitch.me/main.css">
-     <link rel="stylesheet" href="https://sitedatas.glitch.me/uptime-bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
-$('.navbar-light .dmenu').hover(function () {
-        $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
-    }, function () {
-        $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
-    });
-});
-</script>
-
-		<style>
-      .social-part .fa{
-    padding-right:20px;
-}
-ul li a{
-    margin-right: -10px;
-}
-      
-      ull li a{
-    margin-right: -10px;
-}
-
-			.status td {
-				text-align: center !important;
-				padding: 2px;
-			}
-			.status thead {
-				border-bottom: 1px solid #ddd;
-			}
-			.status th:first-child, .status td:first-child { 
-    			font-weight: bolder;
-			}
-			.premium td {
-				text-align: center !important;
-				padding: 15px;
-			}
-			.premium th, .premium td {
-				border-bottom: 1px solid #ddd;
-			}
-			.premium th:first-child, .premium td:first-child { 
-    			font-weight: bolder;
-			}
-			#particle-js {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				background-repeat: no-repeat;
-				background-size: cover;
-				background-position: 50% 50%;
-				opacity: 0.48;
-			}
-			canvas {
-				position: fixed;
-			}
-			@media screen and (max-width: 770px) {
-				.hero-body {
-					padding: 0px !important;
-					padding-top: 3em !important;
-				}
-			}
-			.circle:before {
-				content: ' \25CF';
-				font-size: 16px;
-			}
-		</style>
-	</head>
-	<body>
-
-    <nav class="navbar navbar-expand-sm   navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div  class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul  class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li  class="nav-item">
-              <a  class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/info">Info</a>
-            </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://discord.gg/R73R2Sm">Contact</a>
-          </li>
-          </ul>
-                        <%if(user) {%>
-                  <ull  class="navbar-nav">
-           <li class="nav-item">
-            <a class="nav-link" href="/add">Add</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/profile"><%= user.username %></a>
-          </li>
-          </ull>
-          
-           <%} else {%>
-           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-       <% } %>
-
-        </div>
-      </nav>
-</ul>
-</div>
-
-
-			<div class="hero-body">
-				<div class="container has-text-centered">
-					<h1 class="title">
-	<img class="aw-zoom" src="https://cdn.discordapp.com/attachments/723279024050405427/740937064371060877/uptime-site.png" style="width: 6em; border-radius: 1000000px;">
-</h1>
-<h2 class="subtitle" style="color:#ffffff; margin-top: 1em;">
-	Simplicity, Efficiency, Convenience.
-	<div class="info">
-		<nav class="level" style="margin-top: 2em;">
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Added</p>
-					<p class="title"><%= db.get("linkler").length || 0%></p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Ping</p>
-					<p class="title"><%=Math.round(bot.ping)%></p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-          <p class="heading">Shard</p>
-					<p class="title">-</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Uptime</p>
-					<p class="title">%98</p>
-				</div>
-			</div>
+	<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/css/util.css">
+<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v5/css/main.css">
+</head>
+<body>
   
-			</div>
-    <br><br><br>
-<!---
+             <div class="js">
+    <div id="preloader"></div>
+      <div>
+ </div>
+</div>
+  
+  <style>
+    /*Login*/
+.btn-face,
+.btn-login {
+  font-family: Montserrat-SemiBold;
+  font-size: 18px;
+  line-height: 1.2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: calc((100% - 20px) / 2);
+  height: 70px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  position: relative;
+  z-index: 1;
+}
+.btn-login {
+  color: #555555;
+  background-color: #4ca74c;
+}
+.btn-login img {
+  width: 30px;
+  margin-right: 15px;
+  padding-bottom: 3px;
+}
+    
+    /* Google */
+.btn-face,
+.btn-gooogle {
+  font-family: Montserrat-SemiBold;
+  font-size: 18px;
+  line-height: 1.2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: calc((100% - 20px) / 2);
+  height: 70px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  position: relative;
+  z-index: 1;
+}
+.btn-gooogle {
+  color: #555555;
+  background-color: white;
+}
+.btn-gooogle img {
+  width: 30px;
+  margin-right: 15px;
+  padding-bottom: 3px;
+} 
+    .login-form-title {
+  width: 100%;
+  display: block;
+  font-family: Montserrat-Medium;
+  font-size: 25px;
+  color: #555555;
+  line-height: 1.2;
+  text-align: center;
+}
+  </style>
+  
+<div class="limiter">
+<div class="container-login100" style="background-color:#2c2f33">
+<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+<form class="login100-form validate-form flex-sb flex-w">
+<span class="login-form-title p-b-53"><%= user.username %></span>  
+<a href="/login" class="btn-login m-b-20" style="color:white">
+<img src="https://discord.com/assets/28174a34e77bb5e5310ced9f95cb480b.png" alt="Discord">
+Discord
+</a>
+<a href="?google=ThereSomethingNotReady" class="btn-gooogle m-b-20" style="color:#555555">
+<img src="https://colorlib.com/etc/lf/Login_v5/images/icons/icon-google.png" alt="Google" >
+Google
+  </a>
+  <style>
+  .container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
 
----->
-        			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">by Alfonzo#1921 and cenap#4160</p>
-				</div>
-		</nav>
-	</div>
-</h2>
-        </div></div>
+.login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 60px;
+  background-color: #23272A;
+  border-radius: 10px;
+
+  font-family: Poppins-Medium;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  position: relative;
+  z-index: 1;
+}
+
+.login100-form-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  background: #2C2F33;
+  opacity: 0;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover:before {
+  opacity: 1;
+}
+  </style>
+<div class="p-t-13 p-b-9">
+</div>
+<div class="wrap-input100 validate-input" data-validate="Password is required">
+<span class="focus-input100"></span>
+</div>
+<div class="container-login100-form-btn m-t-17">
+
+<a class="container-login100-form-btn m-t-17">
+<buton class="login100-form-btn">
+  by Alfonzo#1921 and cenap#4160 
+</buton>
+</a>
+
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
+
   
  <%} else {%>
 
