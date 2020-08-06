@@ -173,7 +173,7 @@ linkss = linkA
   app.get("/", (req, res) => {
     renderTemplate(res, req, "index.ejs");
   });
-  app.get("/addlink", checkAuth, (req, res) => {
+  app.get("/add", checkAuth, (req, res) => {
     renderTemplate(res, req, "add.ejs");
   });
   app.get("/info", (req, res) => {
@@ -184,7 +184,7 @@ linkss = linkA
     renderTemplate(res, req, "testing.ejs");
   });
    
-  app.post("/addlink", checkAuth, (req, res) => {
+  app.post("/add", checkAuth, (req, res) => {
     let ayar = req.body;
   let link = ayar["link"];
     if (!ayar["link"]) return res.send("You didn't fill out the link!");
