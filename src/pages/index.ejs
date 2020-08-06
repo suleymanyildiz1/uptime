@@ -108,16 +108,17 @@ ul li a{
           </li>
           </ul>
                         <%if(user) {%>
-                  <ull  class="navbar-nav "">
+                  <ull  class="navbar-nav">
            <li class="nav-item">
             <a class="nav-link" href="/add">Add</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="/profile"><%= user.username %></a>
-          </li>
-           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
-                    </li></ull>
+                    </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile"><%= user.username %></a>
+          </li>
+          </ull>
           
            <%} else {%>
            <li class="nav-item">
