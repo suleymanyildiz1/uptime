@@ -153,7 +153,7 @@ linkss = linkA
 
   app.get("/autherror", (req, res) => {
     res.send(
-      "Auth Error!"
+      "Giriş Doğrulama Hatası!"
     );
   });
 
@@ -183,10 +183,10 @@ linkss = linkA
   app.post("/add", checkAuth, (req, res) => {
     let ayar = req.body;
   let link = ayar["link"];
-    if (!ayar["link"]) return res.send("You didn't fill out the link!");
+    if (!ayar["link"]) return res.send("Bağlantıyı Doldurmadunuz!");
 
  if(db.get("linkler").map(z => z.url).includes(link)) {
-      return res.send("Already in the system!");
+      return res.send("Zaten Sistemde Bulunmakta!");
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
       res.send("Added " + req.user.id);
