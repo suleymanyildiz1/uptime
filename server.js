@@ -189,7 +189,7 @@ linkss = linkA
       return res.send("Zaten Sistemde Bulunmakta!");
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
-      res.send("Added " + req.user.id);
+      res.send("Başarıyla Eklendi! MaximusBoys İyi Günler Diler! Discord: https://discord.gg/maximusboys İD:" + req.user.id);
     }
   });
 
