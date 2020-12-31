@@ -67,7 +67,7 @@ client.on("ready", () => {
 
 
 client.on("ready", () => {
-  client.user.setActivity(`by Alfonzo#1921 and cenap#4160`);
+  client.user.setActivity(`Jesteria #YeniDeğilyeniden`);
   passport.use(
     new Strategy(
       {
@@ -189,7 +189,7 @@ linkss = linkA
       return res.send("Zaten Sistemde Bulunmakta!");
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
-      res.send("Başarıyla Eklendi! MaximusBoys İyi Günler Diler! Discord: https://discord.gg/maximusboys İD:" + req.user.id);
+      res.send("Başarıylan Eklendi ! Jesteria  İyi Günler Sunar. İD:" + req.user.id);
     }
   });
 
