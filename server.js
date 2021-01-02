@@ -207,6 +207,6 @@ const log = message => {
 
 //botu ses sokma
 client.on("ready", () => {
-  client.channels.get("794230919840923698").join();   
+  client.channels.get("794268864815955980").join();   
 })
 //SON 
