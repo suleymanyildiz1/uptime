@@ -67,7 +67,7 @@ client.on("ready", () => {
 
 
 client.on("ready", () => {
-  client.user.setActivity(`Crossfire And Fiery Music`);
+  client.user.setActivity(`FIRE X uptime site`);
   passport.use(
     new Strategy(
       {
@@ -189,7 +189,7 @@ linkss = linkA
       return res.send("Zaten Sistemde Bulunmakta!");
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
-      res.send("Başarıylan Eklendi ! Crossfire  İyi Günler Sunar. İD:" + req.user.id);
+      res.send("Başarıyla Eklendi ! Fire X  İyi Günler Sunar. İD:" + req.user.id);
     }
   });
 
