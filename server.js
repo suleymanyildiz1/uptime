@@ -67,7 +67,7 @@ client.on("ready", () => {
 
 
 client.on("ready", () => {
-  client.user.setActivity(`FIRE X uptime site`);
+  client.user.setActivity(``);
   passport.use(
     new Strategy(
       {
