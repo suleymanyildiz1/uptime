@@ -189,7 +189,7 @@ linkss = linkA
       return res.send("Zaten Sistemde Bulunmakta!");
     } else {
       db.push("linkler", { url: link, owner: req.user.id });
-      res.send("Başarıyla Eklendi ! Fire X  İyi Günler Sunar. İD:" + req.user.id);
+      res.send("Başarıyla Eklendi! İD:" + req.user.id);
     }
   });
 
@@ -206,7 +206,3 @@ const log = message => {
 };
 
 //botu ses sokma
-client.on("ready", () => {
-  client.channels.get("799717433480052767").join();   
-})
-//SON 
