@@ -205,4 +205,3 @@ const log = message => {
   console.log(`${message}`);
 };
 
-//botu ses sokma
